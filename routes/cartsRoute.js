@@ -40,12 +40,14 @@ router.get("/cart", (req, res) => {
  *    consumes:
  *       - application/json
  *    requestBody:
- *      required: true
+ *      type: array
  *      content:
  *        application/json:
  *          schema:
- *            cart:
- *              type: array
+ *            type: object
+ *            properties:
+ *              cart:
+ *                type: string
  *    security:
  *      - bearerAuth: []
  *    responses:
@@ -80,8 +82,8 @@ router.post("/cart", (req, res) => {
  *      content:
  *        application/json:
  *          schema:
- *            type: array
- *            required:
+ *            type: object
+ *            properties:
  *              itemName:
  *                type: string
  *              price:

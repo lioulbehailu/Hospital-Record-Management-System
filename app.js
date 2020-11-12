@@ -199,22 +199,21 @@ app.post("/api/login", async (req, res) => {
  *       - application/json
  *    produces:
  *       - application/json
- *    parameters:
- *      - in: body
- *        name: user
- *        required: true
- *        description: user objects {fullname,email,username,password}
- *        schema:
- *          type: object
- *          required:
- *            - fullName:
- *                type: string
- *              email:
- *                type: string
- *              username:
- *                type: string
- *              password:
- *                type: string
+ *    requestBody:
+ *        type: object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                fullName:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                username:
+ *                  type: string
+ *                password:
+ *                  type: string
  *    responses:
  *      '200':
  *        description: A successful response

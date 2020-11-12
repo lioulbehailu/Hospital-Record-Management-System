@@ -118,17 +118,24 @@ router.post("/items", (req, res) => {
 /**
  * @swagger
  * /api/items/{id}:
- *  post:
+ *  put:
  *    description: update items
  *    consumes:
  *       - application/json
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
  *    requestBody:
+ *      type: object
  *      content:
  *        application/json:
  *          schema:
- *          type: object
- *          properties:
- *            - itemName:
+ *            type: object
+ *            properties:
+ *              itemName:
  *                type: string
  *              price:
  *                type: integer
