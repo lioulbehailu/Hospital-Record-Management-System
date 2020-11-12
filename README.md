@@ -2,8 +2,9 @@
 
 # Navigate to localhost:5000/api-docs/
 
-register with the /api/register/
-login with the /api/login and generate the tokens
+## register with the /api/register/
+
+## login with the /api/login and generate the tokens
 
 copy the token and authorize the other routes
 
