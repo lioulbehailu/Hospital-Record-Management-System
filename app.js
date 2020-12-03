@@ -13,8 +13,8 @@ const swaggerOptions = {
     openapi: "3.0.1",
     info: {
       version: "1.0.0",
-      title: "Gebeya Ecommerce API",
-      description: "Ecommerce API Information",
+      title: "Hospital Management System",
+      description: "Hospital Management System API using Node",
     },
     // host: "localhost:5000",
     basePath: "/",
@@ -43,14 +43,14 @@ const swaggerOptions = {
 };
 
 const config = require("./config/database");
-const User = require("./models/User");
+const Admin = require("./models/Admin");
 require("./passport")(passport);
 
 const { jwtSecret, jwtExpire } = require("./config/keys");
 
 // Routes
-const itemsRoute = require("./routes/itemsRoute");
-const cartsRoute = require("./routes/cartsRoute");
+const patientsRoute = require("./routes/patientsRoute");
+const DoctorsRoute = require("./routes/doctorsRoute");
 
 mongoose.connect(config.database, {
   useNewUrlParser: true,
@@ -85,7 +85,6 @@ const authenticationMiddleware = (req, res, next) => {
       } else if (Object.keys(message).length <= 0) {
         message = { message: "No Auth token Provided" };
       }
-      console.log(error);
       res.status(401).send(message);
     } else if (user) {
       req.user = user;
@@ -105,16 +104,16 @@ app.use(
 // Routes
 /**
  * @swagger
- * /api/:
+ * /api/home:
  *  get:
  *    description: Use to request the homepage
  *    responses:
  *      '200':
  *        description: A successful response
  */
-app.get("/api/", (req, res) => {
+app.get("/api/home", (req, res) => {
   res.status(200).send({
-    message: "Homepage",
+    message: "Homepage of Hospital Management System API",
   });
 });
 
@@ -146,9 +145,8 @@ app.get("/api/", (req, res) => {
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req.body);
   try {
-    const user = await User.findOne({ email: email });
+    const user = await Admin.findOne({ email: email });
     if (!user) {
       return res.status(400).json({
         errorMessage: "Invalid Credentials",
@@ -194,7 +192,7 @@ app.post("/api/login", async (req, res) => {
  * @swagger
  * /api/register:
  *  post:
- *    description: Used to register User
+ *    description: Used to register Admin User
  *    consumes:
  *       - application/json
  *    produces:
@@ -225,7 +223,7 @@ app.post("/api/register", (req, res) => {
     res.status(400).json({ message: "Please Provide Valid Parameters" });
   }
 
-  let newUser = new User({
+  let newUser = new Admin({
     fullName,
     email,
     username,
@@ -241,7 +239,6 @@ app.post("/api/register", (req, res) => {
       newUser.password = hash;
       newUser.save((err) => {
         if (err) {
-          console.log(err);
           return;
         } else {
           res.status(200).send({
@@ -253,8 +250,8 @@ app.post("/api/register", (req, res) => {
   });
 });
 
-app.use("/api/", authenticationMiddleware, itemsRoute);
-app.use("/api/", authenticationMiddleware, cartsRoute);
+app.use("/api/", authenticationMiddleware, patientsRoute);
+app.use("/api/", authenticationMiddleware, DoctorsRoute);
 
 const port = process.env.PORT || 5000;
 

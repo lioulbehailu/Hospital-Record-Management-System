@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-// User Schema
-const UserSchema = mongoose.Schema({
+// Items Schema
+const AdminsSchema = mongoose.Schema({
   fullName: {
     type: String,
     required: true,
@@ -18,10 +18,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  purchasedList: {
-    type: String,
-    required: true,
-  },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Admins", AdminsSchema);

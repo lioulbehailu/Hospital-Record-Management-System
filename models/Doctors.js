@@ -1,23 +1,27 @@
 const mongoose = require("mongoose");
 
 // Items Schema
-const ItemsSchema = mongoose.Schema({
-  itemName: {
+const DoctorsSchema = mongoose.Schema({
+  fullName: {
     type: String,
     required: true,
   },
-  price: {
+  email: {
     type: String,
     required: true,
   },
-  vendorName: {
+  username: {
     type: String,
     required: true,
   },
-  description: {
+  address: {
     type: String,
     required: true,
   },
+  // description: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
-module.exports = mongoose.model("Items", ItemsSchema);
+module.exports = mongoose.model("Doctors", DoctorsSchema);

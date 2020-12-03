@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const JWTStrategy = passportJWT.Strategy;
 const { ExtractJwt } = passportJWT;
-const User = mongoose.model("User");
+const Admins = mongoose.model("Admins");
 
 const { jwtSecret } = require("./keys");
 
@@ -13,7 +13,7 @@ module.exports = new JWTStrategy(
     secretOrKey: jwtSecret,
   },
   (jwtPayload, done) => {
-    User.findOne({ _id: jwtPayload.user._id }, (err, user) => {
+    Admins.findOne({ _id: jwtPayload.user._id }, (err, user) => {
       if (err) {
         return done(true, null);
       } else {
