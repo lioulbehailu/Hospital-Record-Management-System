@@ -27,9 +27,7 @@ router.get("/patients", (req, res) => {
         message: "Internal Error",
       });
     }
-    res.status(200).json({
-      patients,
-    });
+    res.status(200).json(patients);
   });
 });
 
@@ -91,7 +89,7 @@ router.post("/patients", (req, res) => {
     age,
     address,
     phoneNumber,
-    // history,
+    history,
   } = req.body;
 
   let newPatient = new Patients({
@@ -106,7 +104,7 @@ router.post("/patients", (req, res) => {
     age,
     address,
     phoneNumber,
-    // history,
+    history,
   });
 
   console.log(newPatient);

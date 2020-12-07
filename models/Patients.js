@@ -46,7 +46,13 @@ const PatientsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  history: [{ date: { type: String } }, { description: { type: String } }],
+  history: [
+    {
+      date: { type: String },
+      test: { type: String },
+      description: { type: String },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Patients", PatientsSchema);
